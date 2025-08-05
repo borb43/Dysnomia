@@ -80,3 +80,5 @@ function SMODS.poll_seal(args)
         return Dysnomia.old_seal_roll(args)
     end
 end
+
+--TODO: okay at some point add banning rarities support when i figure out how
