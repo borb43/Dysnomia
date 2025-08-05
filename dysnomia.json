@@ -1,0 +1,13 @@
+{
+	"id": "dysnomia",
+	"name": "Dysnomia",
+	"display_name": "Dysnomia",
+	"author": ["Eris (borb43)"],
+	"description": "A random balatro library/API",
+	"prefix": "dysn",
+	"main_file": "",
+	"priority": -1,
+	"badge_colour": "",
+	"badge_text_colour": "",
+	"version": "0.0.0"
+}
