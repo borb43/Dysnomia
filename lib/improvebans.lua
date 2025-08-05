@@ -1,5 +1,5 @@
 --make banning modifiers work with custom pools
-old_enhancement_roll = SMODS.poll_enhancement
+Dysnomia.old_enhancement_roll = SMODS.poll_enhancement
 ---@diagnostic disable-next-line: duplicate-set-field
 function SMODS.poll_enhancement(args) --enhancements
     if args.ignore_bans then
@@ -12,9 +12,9 @@ function SMODS.poll_enhancement(args) --enhancements
                     end
                 end
             end
-            return old_enhancement_roll(args)
+            return Dysnomia.old_enhancement_roll(args)
         else
-            return old_enhancement_roll(args)
+            return Dysnomia.old_enhancement_roll(args)
         end
     elseif args.options then --check if options was filled in, if so trim it to remove banned keys
         to_ban = {}
@@ -33,14 +33,15 @@ function SMODS.poll_enhancement(args) --enhancements
         if #args.options == 0 then
             return nil
         else
-            return old_enhancement_roll(args)
+            return Dysnomia.old_enhancement_roll(args)
         end
     else --return default function if ignore_bans was false or nil and options wasnt filled in
-        return old_enhancement_roll(args)
+        return Dysnomia.old_enhancement_roll(args)
     end
 end
 
-old_seal_roll = SMODS.poll_seal
+Dysnomia.old_seal_roll = SMODS.poll_seal
+---@diagnostic disable-next-line: duplicate-set-field
 function SMODS.poll_seal(args)
     if args.ignore_bans then
         if not args.options then
@@ -52,9 +53,9 @@ function SMODS.poll_seal(args)
                     end
                 end
             end
-            return old_seal_roll(args)
+            return Dysnomia.old_seal_roll(args)
         else
-            return old_seal_roll(args)
+            return Dysnomia.old_seal_roll(args)
         end
     elseif args.options then
         to_ban = {}
@@ -73,9 +74,9 @@ function SMODS.poll_seal(args)
         if #args.options == 0 then
             return nil
         else
-            return old_seal_roll(args)
+            return Dysnomia.old_seal_roll(args)
         end
     else
-        return old_seal_roll(args)
+        return Dysnomia.old_seal_roll(args)
     end
 end
