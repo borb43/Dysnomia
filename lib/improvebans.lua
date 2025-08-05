@@ -1,7 +1,7 @@
 --make banning modifiers work with custom pools
 old_enhancement_roll = SMODS.poll_enhancement
 ---@diagnostic disable-next-line: duplicate-set-field
-function SMODS.poll_enhancement(args)
+function SMODS.poll_enhancement(args) --enhancements
     if args.ignore_bans then
         if not args.options then --allows ignoring bans with default pool
             args.options = {}
@@ -17,7 +17,7 @@ function SMODS.poll_enhancement(args)
             return old_enhancement_roll(args)
         end
     elseif args.options then --check if options was filled in, if so trim it to remove banned keys
-        to_ban = {}
+        local to_ban = {}
         for k, v in pairs(args.options) do
             if G.GAME.banned_keys[k] or G.GAME.banned_keys[v] then
                 to_ban[#to_ban + 1] = k
@@ -39,3 +39,4 @@ function SMODS.poll_enhancement(args)
         return old_enhancement_roll(args)
     end
 end
+
