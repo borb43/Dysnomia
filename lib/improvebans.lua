@@ -17,7 +17,7 @@ function SMODS.poll_enhancement(args) --enhancements
             return old_enhancement_roll(args)
         end
     elseif args.options then --check if options was filled in, if so trim it to remove banned keys
-        local to_ban = {}
+        to_ban = {}
         for k, v in pairs(args.options) do
             if G.GAME.banned_keys[k] or G.GAME.banned_keys[v] then
                 to_ban[#to_ban + 1] = k
