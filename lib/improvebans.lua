@@ -3,12 +3,12 @@ old_enhancement_roll = SMODS.poll_enhancement
 ---@diagnostic disable-next-line: duplicate-set-field
 function SMODS.poll_enhancement(args) --enhancements
     if args.ignore_bans then
-        if not args.options then --allows ignoring bans with default pool
+        if not args.options then      --allows ignoring bans with default pool
             args.options = {}
             for _, v in ipairs(G.P_CENTER_POOLS.Enhanced) do
                 if v.in_pool and type(v.in_pool) == "function" then
                     if v:in_pool() then
-                        args.options[#args.options+1] = v
+                        args.options[#args.options + 1] = v
                     end
                 end
             end
@@ -40,3 +40,42 @@ function SMODS.poll_enhancement(args) --enhancements
     end
 end
 
+old_seal_roll = SMODS.poll_seal
+function SMODS.poll_seal(args)
+    if args.ignore_bans then
+        if not args.options then
+            args.options = {}
+            for _, v in ipairs(G.P_CENTER_POOLS.Enhanced) do
+                if v.in_pool and type(v.in_pool) == "function" then
+                    if v:in_pool() then
+                        args.options[#args.options + 1] = v
+                    end
+                end
+            end
+            return old_seal_roll(args)
+        else
+            return old_seal_roll(args)
+        end
+    elseif args.options then
+        to_ban = {}
+        for k, v in pairs(args.options) do
+            if G.GAME.banned_keys[k] or G.GAME.banned_keys[v] then
+                to_ban[#to_ban + 1] = k
+            elseif type(v) == "table" then
+                if G.GAME.banned_keys[v.key] then
+                    to_ban[#to_ban + 1] = k
+                end
+            end
+        end
+        for _, v in ipairs(to_ban) do
+            args.options[v] = nil
+        end
+        if #args.options == 0 then
+            return nil
+        else
+            return old_seal_roll(args)
+        end
+    else
+        return old_seal_roll(args)
+    end
+end
