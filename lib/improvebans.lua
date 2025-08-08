@@ -12,10 +12,8 @@ function SMODS.poll_enhancement(args) --enhancements
                     end
                 end
             end
-            return Dysnomia.old_enhancement_roll(args)
-        else
-            return Dysnomia.old_enhancement_roll(args)
         end
+        return Dysnomia.old_enhancement_roll(args)
     elseif args.options then --check if options was filled in, if so trim it to remove banned keys
         to_ban = {}
         for k, v in pairs(args.options) do
@@ -31,7 +29,7 @@ function SMODS.poll_enhancement(args) --enhancements
             args.options[v] = nil
         end
         if #args.options == 0 then
-            return nil
+            if args.default then return args.default else return nil end
         else
             return Dysnomia.old_enhancement_roll(args)
         end
@@ -53,10 +51,8 @@ function SMODS.poll_seal(args)
                     end
                 end
             end
-            return Dysnomia.old_seal_roll(args)
-        else
-            return Dysnomia.old_seal_roll(args)
         end
+        return Dysnomia.old_seal_roll(args)
     elseif args.options then
         to_ban = {}
         for k, v in pairs(args.options) do
@@ -72,7 +68,7 @@ function SMODS.poll_seal(args)
             args.options[v] = nil
         end
         if #args.options == 0 then
-            return nil
+            if args.default then return args.default else return nil end
         else
             return Dysnomia.old_seal_roll(args)
         end
